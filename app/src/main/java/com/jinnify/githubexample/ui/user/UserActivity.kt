@@ -1,12 +1,13 @@
-package com.jinnify.githubexample
+package com.jinnify.githubexample.ui.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.jinnify.githubexample.R
 
-class MainActivity : AppCompatActivity() {
+class UserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_user)
     }
 }

@@ -1,4 +1,4 @@
-package com.jinnify.githubexample.di
+package com.jinnify.githubexample.di.module
 
 import com.jinnify.githubexample.App
 import dagger.BindsInstance
@@ -9,7 +9,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    AndroidInjectionModule::class
+    AndroidInjectionModule::class,
+    ActivityBindModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
 
