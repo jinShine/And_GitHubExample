@@ -1,5 +1,6 @@
 package com.jinnify.githubexample.di.module
 
+import com.jinnify.data.Service.GitHubApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -14,12 +15,17 @@ class NetworkModule {
     @Singleton
     fun provideGitHubAPIClient(
         okHttpClient: OkHttpClient
-    ): Retrofit = Retrofit.Builder().client(okHttpClient)
-            .baseUrl("https://api.github.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    ): Retrofit = Retrofit.Builder()
+        .client(okHttpClient)
+        .baseUrl("https://api.github.com")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
     @Provides
     @Singleton
-    fun provideCreate(retrofit: Retrofit) = retrofit.create()
+    fun provideCreate(retrofit: Retrofit) = retrofit.create(GitHubApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().build()
 }
