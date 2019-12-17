@@ -1,11 +1,16 @@
 package com.jinnify.githubexample.ui.user
 
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jinnify.githubexample.R
 import com.jinnify.githubexample.utility.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_user.*
 import javax.inject.Inject
 
 class UserActivity : DaggerAppCompatActivity() {
@@ -26,5 +31,9 @@ class UserActivity : DaggerAppCompatActivity() {
                 println("${it}")
             }
         )
+
+
+        recyclerView.adapter = 
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
