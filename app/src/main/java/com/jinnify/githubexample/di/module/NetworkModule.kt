@@ -1,6 +1,6 @@
 package com.jinnify.githubexample.di.module
 
-import com.jinnify.data.Service.GitHubApiService
+import com.jinnify.githubexample.data.service.GitHubApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

@@ -1,4 +1,4 @@
-package com.jinnify.githubexample
+package com.jinnify.githubexample.utility
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

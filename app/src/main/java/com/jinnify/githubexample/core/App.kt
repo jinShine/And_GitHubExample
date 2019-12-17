@@ -1,4 +1,4 @@
-package com.jinnify.githubexample
+package com.jinnify.githubexample.core
 
 import com.jinnify.githubexample.di.module.DaggerAppComponent
 import dagger.android.AndroidInjector

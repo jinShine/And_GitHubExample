@@ -1,9 +1,9 @@
-package com.jinnify.data.model
+package com.jinnify.githubexample.data.model
 
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName(value = "login") val login: String,
+    @SerializedName("login") val login: String,
     @SerializedName("id") val id: Int,
     @SerializedName("node_id") val nodeId: String,
     @SerializedName("avatar_url") val avatarUrl: String,

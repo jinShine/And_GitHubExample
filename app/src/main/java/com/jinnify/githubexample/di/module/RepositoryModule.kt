@@ -1,7 +1,7 @@
 package com.jinnify.githubexample.di.module
 
-import com.jinnify.data.repository.GitHubRepository
-import com.jinnify.data.repository.GitHubRepositoryImpl
+import com.jinnify.githubexample.data.repository.GitHubRepository
+import com.jinnify.githubexample.data.repository.GitHubRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton

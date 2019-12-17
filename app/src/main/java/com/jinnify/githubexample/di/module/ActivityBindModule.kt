@@ -1,7 +1,7 @@
 package com.jinnify.githubexample.di.module
 
-import com.jinnify.githubexample.ui.user.UserActivity
 import com.jinnify.githubexample.di.scope.PerActivity
+import com.jinnify.githubexample.ui.user.UserActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

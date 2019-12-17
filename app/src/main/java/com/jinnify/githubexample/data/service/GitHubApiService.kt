@@ -1,6 +1,6 @@
-package com.jinnify.data.Service
+package com.jinnify.githubexample.data.service
 
-import com.jinnify.data.model.User
+import com.jinnify.githubexample.data.model.User
 import retrofit2.Call
 import retrofit2.http.GET
 

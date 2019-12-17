@@ -1,30 +1,33 @@
 package com.jinnify.githubexample.ui.user
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.jinnify.data.model.User
-import com.jinnify.data.repository.GitHubRepository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.jinnify.githubexample.data.model.User
+import com.jinnify.githubexample.data.repository.GitHubRepository
+import com.jinnify.githubexample.data.service.GitHubResponse
+
 import javax.inject.Inject
 
 class UserViewModel @Inject constructor(
     private val repository: GitHubRepository
-): ViewModel() {
+) : ViewModel() {
 
-    fun fetchUser() {
-        println("ViewModel")
+    private val _userListLiveData = MutableLiveData<List<User>>()
+    val userListLiveData: LiveData<List<User>> = _userListLiveData
 
-        repository.fetchUser().enqueue(object : Callback<List<User>> {
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                println(" ${t.message}")
+    private val liveDataManager = Observer<GitHubResponse> { response ->
+        when (response) {
+            is GitHubResponse.Success -> {
+                _userListLiveData.value = response.data
             }
-
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                println(" ${response.body()}")
-            }
-
-        })
+        }
     }
+
+    init {
+        repository.userListLiveData().observeForever(liveDataManager)
+    }
+
 }
 

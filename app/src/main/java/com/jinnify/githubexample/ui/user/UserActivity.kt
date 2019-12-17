@@ -1,10 +1,10 @@
 package com.jinnify.githubexample.ui.user
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.jinnify.githubexample.R
-import com.jinnify.githubexample.ViewModelFactory
+import com.jinnify.githubexample.utility.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -21,8 +21,10 @@ class UserActivity : DaggerAppCompatActivity() {
             .of(this, viewModelFactory)
             .get(UserViewModel::class.java)
 
-        println(" : ")
-
-        viewModel.fetchUser()
+        viewModel.userListLiveData.observe(
+            this, Observer {
+                println("${it}")
+            }
+        )
     }
 }
