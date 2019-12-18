@@ -17,17 +17,18 @@ class UserViewModel @Inject constructor(
     private val _userListLiveData = MutableLiveData<List<User>>()
     val userListLiveData: LiveData<List<User>> = _userListLiveData
 
-    private val liveDataManager = Observer<GitHubResponse> { response ->
-        when (response) {
-            is GitHubResponse.Success -> {
-                _userListLiveData.value = response.data
+    init {
+        repository.getUsers { response ->
+
+            when (response) {
+                is GitHubResponse.Success -> {
+                     _userListLiveData.value = response.data
+                }
+                is GitHubResponse.Failure -> {
+//                    _userListLiveData.value = response.error
+                }
             }
         }
     }
-
-    init {
-        repository.userListLiveData().observeForever(liveDataManager)
-    }
-
 }
 

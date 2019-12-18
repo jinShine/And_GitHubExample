@@ -1,12 +1,9 @@
 package com.jinnify.githubexample.ui.user
 
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.jinnify.githubexample.R
 import com.jinnify.githubexample.utility.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
@@ -18,6 +15,8 @@ class UserActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+    private val adapter = UserRecyclerViewAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
@@ -26,14 +25,17 @@ class UserActivity : DaggerAppCompatActivity() {
             .of(this, viewModelFactory)
             .get(UserViewModel::class.java)
 
+        recyclerView.adapter = adapter
+
+        //xml에 대체로 가능
+//        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
         viewModel.userListLiveData.observe(
             this, Observer {
-                println("${it}")
+                adapter.setUsers(it)
             }
         )
 
-
-        recyclerView.adapter = 
-        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
