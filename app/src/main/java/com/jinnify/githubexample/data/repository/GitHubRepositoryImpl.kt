@@ -1,5 +1,6 @@
 package com.jinnify.githubexample.data.repository
 
+import android.provider.SyncStateContract.Helpers.update
 import com.jinnify.githubexample.data.model.User
 import com.jinnify.githubexample.data.service.GitHubApiService
 import com.jinnify.githubexample.data.service.GitHubResponse
@@ -27,11 +28,15 @@ class GitHubRepositoryImpl @Inject constructor(
 
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 response.body()?.let {
-                    cachedUserList.clear()
-                    cachedUserList.addAll(it)
+                    updateUsers(it)
                     completion.invoke(GitHubResponse.Success(it))
                 }
             }
         })
+    }
+
+    private fun updateUsers(list: List<User>) {
+        cachedUserList.clear()
+        cachedUserList.addAll(list)
     }
 }

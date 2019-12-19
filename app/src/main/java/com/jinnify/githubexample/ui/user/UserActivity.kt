@@ -15,21 +15,33 @@ class UserActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+    private val viewModel: UserViewModel by lazy {
+        ViewModelProviders
+            .of(this, viewModelFactory)
+            .get(UserViewModel::class.java)
+    }
+
     private val adapter = UserRecyclerViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-        val viewModel = ViewModelProviders
-            .of(this, viewModelFactory)
-            .get(UserViewModel::class.java)
+        configureRecyclerView()
+        eventBinding()
 
+    }
+
+    private fun configureRecyclerView() {
         recyclerView.adapter = adapter
 
         //xml에 대체로 가능
-//        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        //app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+
+    private fun eventBinding() {
 
         viewModel.userListLiveData.observe(
             this, Observer {
@@ -37,5 +49,12 @@ class UserActivity : DaggerAppCompatActivity() {
             }
         )
 
+        viewModel.isSwipeRefresh.observe(
+            this, Observer {
+                swipeRefresh.isRefreshing = it
+            }
+        )
+
+        swipeRefresh.setOnRefreshListener {  viewModel.refresh() }
     }
 }
