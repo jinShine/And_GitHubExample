@@ -55,6 +55,6 @@ class UserActivity : DaggerAppCompatActivity() {
             }
         )
 
-        swipeRefresh.setOnRefreshListener {  viewModel.refresh() }
+        swipeRefresh.setOnRefreshListener { viewModel.refresh() }
     }
 }
