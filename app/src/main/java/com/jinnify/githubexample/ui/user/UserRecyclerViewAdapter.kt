@@ -7,7 +7,9 @@ import com.jinnify.githubexample.R
 import com.jinnify.githubexample.data.model.User
 import com.jinnify.githubexample.ui.user.viewholder.UserViewHolder
 
-class UserRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserRecyclerViewAdapter(
+    private val onClick: (Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val VIEW_TYPE_USER = R.layout.viewholder_user
@@ -24,7 +26,7 @@ class UserRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(VIEW_TYPE_USER, parent, false)
 
-        return UserViewHolder(view)
+        return UserViewHolder(view, onClick)
     }
 
     override fun getItemCount() = userList.count()

@@ -1,6 +1,5 @@
 package com.jinnify.githubexample.data.repository
 
-import android.provider.SyncStateContract.Helpers.update
 import com.jinnify.githubexample.data.model.User
 import com.jinnify.githubexample.data.service.GitHubApiService
 import com.jinnify.githubexample.data.service.GitHubResponse

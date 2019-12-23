@@ -8,7 +8,8 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.viewholder_user.view.*
 
 class UserViewHolder(
-    override val containerView: View
+    override val containerView: View,
+    private val onClick: (Int) -> Unit
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     companion object {
@@ -27,6 +28,10 @@ class UserViewHolder(
 
             userID.text = "${item.id}"
             userName.text = item.login
+
+            setOnClickListener {
+                onClick(item.id)
+            }
         }
     }
 }
