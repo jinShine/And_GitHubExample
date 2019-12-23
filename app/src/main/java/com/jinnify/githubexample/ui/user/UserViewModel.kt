@@ -28,8 +28,12 @@ class UserViewModel @Inject constructor(
     private fun getUsers() {
         repository.getUsers { response ->
             when (response) {
-                is GitHubResponse.Success -> _userListLiveData.value = response.data
+                is GitHubResponse.Success -> {
+                    println("${response.data}")
+                    _userListLiveData.value = response.data
+                }
                 is GitHubResponse.Failure -> {
+                    println("")
 //                    _userListLiveData.value = response.error
                 }
             }
