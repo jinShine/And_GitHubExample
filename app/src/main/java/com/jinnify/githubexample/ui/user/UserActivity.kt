@@ -1,10 +1,12 @@
 package com.jinnify.githubexample.ui.user
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jinnify.githubexample.R
+import com.jinnify.githubexample.ui.detail.DetailActivity
 import com.jinnify.githubexample.utility.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_user.*
@@ -21,7 +23,11 @@ class UserActivity : DaggerAppCompatActivity() {
             .get(UserViewModel::class.java)
     }
 
-    private val adapter = UserRecyclerViewAdapter()
+    private val adapter = UserRecyclerViewAdapter {
+        startActivity(Intent(this, DetailActivity::class.java).apply {
+            putExtra("id", it)
+        })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
