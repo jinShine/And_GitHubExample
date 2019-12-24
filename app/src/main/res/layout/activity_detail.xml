@@ -7,7 +7,6 @@
         <variable
             name="viewModel"
             type="com.jinnify.githubexample.ui.detail.DetailViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,18 +14,57 @@
         android:layout_height="match_parent"
         tools:context=".ui.detail.DetailActivity">
 
-        <TextView
-            android:id="@+id/testText"
-            android:text="@{viewModel.userLiveData.toString()}"
+        <ImageView
+            android:id="@+id/userImageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:layout_margin="50dp"
+            app:imageSrc="@{viewModel.userLiveData.avatarUrl}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintDimensionRatio="1" />
+
+        <TextView
+            android:id="@+id/userID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewModel.userLiveData.id)}"
+            android:layout_marginTop="20dp"
+            tools:text="ID"
+            app:layout_constraintTop_toBottomOf="@id/userImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/userName" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{viewModel.userLiveData.login}"
+            tools:text="NAME"
+            app:layout_constraintStart_toEndOf="@id/userID"
+            app:layout_constraintTop_toBottomOf="@id/userImageView"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autoLink="all"
+            android:text="@{viewModel.userLiveData.htmlUrl}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userID"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:onClick="@{()->viewModel.randomUser()}"/>
+            android:onClick="@{()->viewModel.randomUser()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

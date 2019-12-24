@@ -1,6 +1,8 @@
 package com.jinnify.githubexample.ui.user.viewholder
 
 import android.view.View
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jinnify.githubexample.data.model.User
@@ -12,19 +14,8 @@ class UserViewHolder(
     private val onClick: (Int) -> Unit
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-    companion object {
-        const val USER_IMAGE_SIZE = 60
-    }
-
     fun bind(item: User) {
-
         with(containerView) {
-            println("${item}")
-
-            Glide.with(this)
-                .load(item.avatarUrl)
-                .override(USER_IMAGE_SIZE)
-                .into(userImageView)
 
             userID.text = "${item.id}"
             userName.text = item.login
@@ -34,4 +25,11 @@ class UserViewHolder(
             }
         }
     }
+}
+
+@BindingAdapter("imageSrc")
+fun imageSrc(imageView: ImageView, url: String) {
+    Glide.with(imageView)
+        .load(url)
+        .into(imageView)
 }
