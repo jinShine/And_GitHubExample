@@ -24,8 +24,9 @@ class UserActivity : DaggerAppCompatActivity() {
     }
 
     private val adapter = UserRecyclerViewAdapter {
+        println("${it}")
         startActivity(Intent(this, DetailActivity::class.java).apply {
-            putExtra("id", it)
+            this.putExtra("id", it)
         })
     }
 

@@ -15,14 +15,18 @@ class DetailViewModel @Inject constructor(
     private val _userLiveData = MutableLiveData<User>()
     val userLiveData: LiveData<User> = _userLiveData
 
+    private val _errorLiveData = MutableLiveData<Error>()
+    val errorLiveData: LiveData<Error> = _errorLiveData
+
     fun fetchUser(id: Int) {
-        gitHubRepository.getUsers {
-            when (it) {
-                is GitHubResponse.Success ->  {
-                    val user = it.data.firstOrNull { it.id == id }
-                    user?.let {
-                        _userLiveData.value = it
-                    }
+        gitHubRepository.getUsers { response ->
+            when (response) {
+                is GitHubResponse.Success -> {
+                    val user = response.data.firstOrNull { it.id == id }
+                    user?.let { _userLiveData.value = it }
+                }
+                is GitHubResponse.Failure -> {
+                    _errorLiveData.value = Error("네트워크 에러")
                 }
             }
         }
